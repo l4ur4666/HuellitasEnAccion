@@ -1,10 +1,12 @@
+import os
 import mysql.connector
 
 conexion = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database="techstore_sena"
+    host=os.environ.get("MYSQLHOST", "localhost"),
+    port=int(os.environ.get("MYSQLPORT", 3306)),
+    user=os.environ.get("MYSQLUSER", "root"),
+    password=os.environ.get("MYSQLPASSWORD", ""),
+    database=os.environ.get("MYSQLDATABASE", "techstore_sena")
 )
 
 cursor = conexion.cursor()
