@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 import mysql.connector
 import bcrypt
+import os
 
 app = Flask(__name__)
 
@@ -10,11 +11,11 @@ app = Flask(__name__)
 # ========================================
 
 conexion = mysql.connector.connect(
-    host="::1",
-    user="root",
-    password="",
-    database="huellitas_sirs",
-    port=3306,
+    host=os.environ.get("MYSQLHOST", "localhost"),
+    user=os.environ.get("MYSQLUSER", "root"),
+    password=os.environ.get("MYSQLPASSWORD", ""),
+    database=os.environ.get("MYSQLDATABASE", "huellitas_sirs"),
+    port=int(os.environ.get("MYSQLPORT", 3306)),
     use_pure=True
 )
 
@@ -85,6 +86,7 @@ def login():
         hash_guardado = usuario_encontrado["hash_password"]
 
         try:
+
             if isinstance(hash_guardado, str):
                 hash_guardado = hash_guardado.encode("utf-8")
 
@@ -92,6 +94,7 @@ def login():
                 password.encode("utf-8"),
                 hash_guardado
             ):
+
                 return render_template(
                     "bienvenida.html",
                     nombre=usuario_encontrado["nombres"]
@@ -121,12 +124,14 @@ def registrar():
         return render_template("registro.html")
 
     # Recibir datos del formulario
+
     nombres = request.form["nombre"]
     apellidos = request.form["apellidos"]
     email = request.form["correo"]
     password = request.form["password"]
 
     # Crear hash seguro de la contraseña
+
     hash_password = bcrypt.hashpw(
         password.encode("utf-8"),
         bcrypt.gensalt()
@@ -135,6 +140,7 @@ def registrar():
     cursor = conexion.cursor()
 
     # Insertar usuario en MySQL
+
     sql = """
     INSERT INTO usuario(
         nombres,
@@ -164,7 +170,9 @@ def registrar():
     <html lang="es">
 
     <head>
+
         <meta charset="UTF-8">
+
         <title>Registro exitoso</title>
 
         <style>
@@ -207,6 +215,7 @@ def registrar():
             }
 
         </style>
+
     </head>
 
     <body>
@@ -215,7 +224,9 @@ def registrar():
 
             <h1>🐾 ¡Registro exitoso! 💖</h1>
 
-            <p>Tu cuenta fue creada correctamente. ✨</p>
+            <p>
+                Tu cuenta fue creada correctamente. ✨
+            </p>
 
             <a href="/login">
                 🔐 Iniciar sesión
