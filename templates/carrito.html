@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Carrito de compras - Huellitas En Acción</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffc0df;
+            color: #555;
+        }
+
+        .contenedor-carrito {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-sizing: border-box;
+        }
+
+        .encabezado-carrito {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .encabezado-carrito img {
+            width: 170px;
+            border-radius: 15px;
+        }
+
+        .encabezado-carrito h1 {
+            color: #555;
+            margin: 0;
+        }
+
+        .icono-carrito {
+            font-size: 45px;
+            margin-left: auto;
+        }
+
+        .opciones {
+            display: flex;
+            justify-content: flex-end;
+            gap: 25px;
+            margin: 15px 0 25px;
+            font-size: 14px;
+        }
+
+        .correctos {
+            color: green;
+        }
+
+        .incorrectos {
+            color: #d33;
+        }
+
+        #productos-carrito {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .producto-carrito {
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            background: #fff;
+        }
+
+        .producto-carrito img {
+            width: 100%;
+            height: 130px;
+            object-fit: contain;
+        }
+
+        .producto-carrito h3 {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .btn-eliminar {
+            border: none;
+            background: #ff8fab;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .btn-volver {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            text-decoration: none;
+            background: #7ec8f8;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+        }
+
+        .carrito-vacio {
+            text-align: center;
+            padding: 50px;
+            font-size: 20px;
+        }
+
+        @media (max-width: 800px) {
+
+            #productos-carrito {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            #productos-carrito {
+                grid-template-columns: 1fr;
+            }
+
+            .encabezado-carrito {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .icono-carrito {
+                margin-left: 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="contenedor-carrito">
+
+
+        <div class="encabezado-carrito">
+
+            <img
+                src="{{ url_for('static', filename='img/logo.png') }}"
+                alt="Logo Huellitas En Acción"
+            >
+
+            <h1>Carrito de compras</h1>
+
+            <div class="icono-carrito">
+                🛒
+            </div>
+
+        </div>
+
+
+        <div class="opciones">
+
+            <span class="correctos">
+                productos correctos ✓
+            </span>
+
+            <span class="incorrectos">
+                productos incorrectos ✕
+            </span>
+
+        </div>
+
+
+        <div id="productos-carrito"></div>
+
+
+        <a href="/" class="btn-volver">
+            🏠 Volver a la tienda
+        </a>
+
+
+    </div>
+
+
+    <script>
+
+        const contenedorCarrito =
+            document.getElementById("productos-carrito");
+
+
+        function cargarCarrito() {
+
+            const carritoGuardado =
+                localStorage.getItem("carrito");
+
+
+            const carrito =
+                carritoGuardado
+                    ? JSON.parse(carritoGuardado)
+                    : [];
+
+
+            contenedorCarrito.innerHTML = "";
+
+
+            if (carrito.length === 0) {
+
+                contenedorCarrito.innerHTML = `
+
+                    <div class="carrito-vacio">
+
+                        🐾
+
+                        <h2>
+                            Tu carrito está vacío
+                        </h2>
+
+                        <p>
+                            Agrega productos para verlos aquí.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            carrito.forEach((producto, indice) => {
+
+                contenedorCarrito.innerHTML += `
+
+                    <div class="producto-carrito">
+
+                        <img
+                            src="${producto.imagen}"
+                            alt="${producto.nombre}"
+                        >
+
+                        <h3>
+                            ${producto.nombre}
+                        </h3>
+
+                        <p>
+                            ${producto.descripcion}
+                        </p>
+
+                        <button
+                            class="btn-eliminar"
+                            onclick="eliminarProducto(${indice})"
+                        >
+                            ✕ Quitar
+                        </button>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        function eliminarProducto(indice) {
+
+            let carrito =
+                JSON.parse(
+                    localStorage.getItem("carrito")
+                ) || [];
+
+
+            carrito.splice(indice, 1);
+
+
+            localStorage.setItem(
+                "carrito",
+                JSON.stringify(carrito)
+            );
+
+
+            cargarCarrito();
+
+        }
+
+
+        cargarCarrito();
+
+    </script>
+
+
+</body>
+
+</html>

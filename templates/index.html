@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Huellitas En Acción</title>
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+
+
+    <style>
+
+        /* ========================================
+           💖 MENSAJES DE INICIO DE SESIÓN
+           ======================================== */
+
+        .mensaje-flash {
+
+            width: 80%;
+
+            max-width: 700px;
+
+            margin: 20px auto;
+
+            padding: 15px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+
+        }
+
+
+        .mensaje-flash.exito {
+
+            background: #ffffff;
+
+            color: #7ec8f8;
+
+        }
+
+
+        .mensaje-flash.salida {
+
+            background: #ffffff;
+
+            color: #ff8fab;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================
+     💖 MENSAJES DE FLASK
+     ======================================== -->
+
+{% with mensajes = get_flashed_messages(with_categories=true) %}
+
+    {% if mensajes %}
+
+        {% for categoria, mensaje in mensajes %}
+
+            <div class="mensaje-flash {{ categoria }}">
+
+                {{ mensaje }}
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endwith %}
+
+
+
+<header>
+
+
+    <!-- ========================================
+         👤 BARRA SUPERIOR
+         ======================================== -->
+
+    <div class="barra-superior">
+
+        <div class="usuario">
+
+            <a href="{{ url_for('login') }}">
+
+                👤 Iniciar Sesión
+
+            </a>
+
+        </div>
+
+
+        <div class="menu">
+
+            ⋮
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================================
+         🔎 BUSCADOR
+         ======================================== -->
+
+    <div class="busqueda">
+
+        <div
+            class="abrir-busqueda"
+            onclick="mostrarBuscador()"
+        >
+
+            <img
+                src="{{ url_for('static', filename='img/Lupa.png') }}"
+                class="lupa"
+                alt="Buscar"
+            >
+
+            <span>
+
+                Búsqueda
+
+            </span>
+
+        </div>
+
+
+        <input
+            type="text"
+            id="buscador"
+            placeholder="Buscar productos..."
+        >
+
+    </div>
+
+
+
+    <!-- ========================================
+         🐱 LOGO
+         ======================================== -->
+
+    <img
+        src="{{ url_for('static', filename='img/logo.png') }}"
+        alt="Logo Huellitas En Acción"
+    >
+
+
+    <h1>
+
+        Huellitas En Acción
+
+    </h1>
+
+
+    <p>
+
+        Tu mascota, nuestra misión
+
+    </p>
+
+
+</header>
+
+
+
+<!-- ========================================
+     🛍️ PRODUCTOS
+     ======================================== -->
+
+<section
+    class="productos"
+    id="contenedor-productos"
+>
+</section>
+
+
+
+<!-- ========================================
+     🐾 SOBRE HUELLITAS
+     ======================================== -->
+
+<section class="sobre">
+
+    <h2>
+
+        Sobre Huellitas En Acción
+
+    </h2>
+
+
+    <p>
+
+        Somos una tienda dedicada al bienestar
+        de las mascotas.
+
+        Ofrecemos productos de calidad,
+        accesorios, alimentos y artículos para
+        el cuidado y felicidad de perros y gatos.
+
+    </p>
+
+</section>
+
+
+
+<!-- ========================================
+     ⭐ RESEÑAS
+     ======================================== -->
+
+<section class="resenas">
+
+    <h2>
+
+        Opiniones de nuestros clientes
+
+    </h2>
+
+
+    <div class="comentario">
+
+        ⭐⭐⭐⭐⭐ Excelente atención y productos de calidad.
+
+    </div>
+
+
+    <div class="comentario">
+
+        ⭐⭐⭐⭐⭐ Mi gato ama los juguetes que compré aquí.
+
+    </div>
+
+
+    <div class="comentario">
+
+        ⭐⭐⭐⭐⭐ Muy buena experiencia de compra.
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================
+     🛒 CARRITO
+     ======================================== -->
+
+<div
+    class="carrito"
+    onclick="window.location.href='/carrito'"
+>
+
+    🛒
+
+</div>
+
+
+
+<!-- ========================================
+     💖 MODAL DE CONFIRMACIÓN
+     ======================================== -->
+
+<div
+    id="modal-carrito"
+    class="modal"
+>
+
+    <div class="modal-contenido">
+
+        <h2>
+
+            💖 Huellitas En Acción
+
+        </h2>
+
+
+        <p id="mensaje-modal"></p>
+
+
+        <div class="botones-modal">
+
+            <button id="cancelar">
+
+                Cancelar
+
+            </button>
+
+
+            <button id="aceptar">
+
+                Agregar 🛒
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================
+     🐾 MODAL DE ÉXITO
+     ======================================== -->
+
+<div
+    id="modal-exito"
+    class="modal"
+>
+
+    <div class="modal-contenido">
+
+        <h2>
+
+            🐾 ¡Producto agregado!
+
+        </h2>
+
+
+        <p id="mensaje-exito"></p>
+
+
+        <button id="cerrar-exito">
+
+            Aceptar 💗
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================
+     📦 RUTA DE PRODUCTOS
+     ======================================== -->
+
+<script>
+
+    const RUTA_PRODUCTOS =
+        "{{ url_for('static', filename='img/productos/') }}";
+
+</script>
+
+
+
+<!-- ========================================
+     🛍️ JAVASCRIPT
+     ======================================== -->
+
+<script
+    src="{{ url_for('static', filename='js/productos.js') }}"
+></script>
+
+
+</body>
+
+</html>
