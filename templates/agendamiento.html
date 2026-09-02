@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Agendamiento de citas
+    </title>
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+
+</head>
+
+
+<body class="pagina-formulario">
+
+
+<div class="formulario-contenedor">
+
+
+    <a
+        href="{{ url_for('tienda') }}"
+        class="volver"
+    >
+
+        ← Volver a la tienda
+
+    </a>
+
+
+    <img
+        class="icono-titulo"
+        src="{{ url_for('static', filename='img/Calendario.png') }}"
+        alt=""
+    >
+
+
+    <h1>
+
+        Agendamiento de citas 🐾
+
+    </h1>
+
+
+    <p class="horario-atencion">
+
+        🕕 Horario de atención:
+        6:00 AM hasta las 8:00 PM
+
+    </p>
+
+
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+
+        {% if mensajes %}
+
+            {% for categoria, mensaje in mensajes %}
+
+                <div
+                    class="mensaje-flash {{ categoria }}"
+                >
+
+                    {{ mensaje }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    {% if error %}
+
+        <div class="error-formulario">
+
+            {{ error }}
+
+        </div>
+
+    {% endif %}
+
+
+    <form method="POST">
+
+
+        <label>
+
+            Nombre
+
+        </label>
+
+
+        <input
+            type="text"
+            value="{{ session.get('nombre') }}"
+            readonly
+        >
+
+
+        <label>
+
+            Correo electrónico
+
+        </label>
+
+
+        <input
+            type="email"
+            value="{{ session.get('email') }}"
+            readonly
+        >
+
+
+        <label>
+
+            Fecha
+
+        </label>
+
+
+        <input
+            type="date"
+            name="fecha"
+            required
+        >
+
+
+        <label>
+
+            Hora
+
+        </label>
+
+
+        <input
+            type="time"
+            name="hora"
+            min="06:00"
+            max="19:59"
+            required
+        >
+
+
+        <label>
+
+            Servicio
+
+        </label>
+
+
+        <input
+            type="text"
+            name="servicio"
+            placeholder="Ejemplo: Consulta veterinaria"
+            required
+        >
+
+
+        <label>
+
+            Nombre de la mascota
+
+        </label>
+
+
+        <input
+            type="text"
+            name="mascota"
+            required
+        >
+
+
+        <label>
+
+            Motivo de la cita
+
+        </label>
+
+
+        <textarea
+            name="motivo"
+            placeholder="Cuéntanos el motivo de la cita..."
+        ></textarea>
+
+
+        <label class="no-robot">
+
+            <input
+                type="checkbox"
+                name="no_robot"
+                value="1"
+                required
+            >
+
+            Verifico que no soy un robot
+
+        </label>
+
+
+        <button
+            type="submit"
+            class="boton-principal"
+        >
+
+            <img
+                src="{{ url_for('static', filename='img/Calendario.png') }}"
+                alt=""
+            >
+
+            Agendar cita
+
+        </button>
+
+
+    </form>
+
+
+</div>
+
+
+</body>
+
+</html>

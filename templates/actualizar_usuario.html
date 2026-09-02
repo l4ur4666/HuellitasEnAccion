@@ -12,7 +12,7 @@
     >
 
     <title>
-        Iniciar sesión
+        Actualizar usuario
     </title>
 
 
@@ -26,35 +26,26 @@
         rel="stylesheet"
         href="{{ url_for('static', filename='css/estilos.css') }}"
     >
-
     <style>
     /* =====================================================
-       AJUSTES EXCLUSIVOS DEL LOGIN
-       NO AFECTA LAS DEMÁS PÁGINAS
-    ===================================================== */
+       AJUSTES EXCLUSIVOS DE ACTUALIZAR USUARIO
+       ===================================================== */
 
     .pagina-formulario .formulario-contenedor {
         width: min(520px, 100%);
-        padding: 22px 30px 25px;
-        text-align: center;
     }
 
-    .pagina-formulario .logo-formulario {
-        width: 170px !important;
-        height: 170px !important;
+    .pagina-formulario .icono-titulo {
+        width: 85px !important;
+        height: 85px !important;
         object-fit: contain !important;
         display: block !important;
-        margin: 0 auto 5px !important;
+        margin: 5px auto 8px !important;
     }
 
     .pagina-formulario .formulario-contenedor h1 {
-        margin: 3px 0 3px;
+        margin: 5px 0 15px;
         font-size: 25px;
-    }
-
-    .pagina-formulario .formulario-contenedor h2 {
-        margin: 0 0 10px;
-        font-size: 18px;
     }
 
     .pagina-formulario .formulario-contenedor form {
@@ -72,6 +63,7 @@
         font-weight: 600;
     }
 
+    .pagina-formulario .formulario-contenedor input[type="text"],
     .pagina-formulario .formulario-contenedor input[type="email"],
     .pagina-formulario .formulario-contenedor input[type="password"] {
         display: block !important;
@@ -87,11 +79,10 @@
 
     .pagina-formulario .formulario-contenedor .no-robot {
         display: flex !important;
-        width: 100%;
         align-items: center;
         justify-content: center;
         gap: 6px;
-        margin: 2px 0;
+        margin: 3px 0;
         font-size: 11px;
         font-weight: 400;
     }
@@ -101,66 +92,90 @@
         height: auto !important;
     }
 
-    .pagina-formulario .formulario-contenedor button[type="submit"] {
+    .pagina-formulario .formulario-contenedor .boton-principal {
         width: 100% !important;
         min-height: 68px !important;
-        height: auto !important;
         margin-top: 5px;
         padding: 8px 15px !important;
         box-sizing: border-box !important;
-        border: none;
-        border-radius: 13px;
-        background: #f3a3c2;
-        color: white;
+        border-radius: 13px !important;
         display: flex !important;
         align-items: center;
         justify-content: center;
         gap: 12px;
         font-family: "Fredoka", sans-serif;
         font-size: 16px;
-        cursor: pointer;
     }
 
-    .pagina-formulario .formulario-contenedor button[type="submit"] img {
+    .pagina-formulario .formulario-contenedor .boton-principal img {
         width: 52px !important;
         height: 52px !important;
         object-fit: contain !important;
-        max-width: 52px !important;
-    }
-
-    .pagina-formulario .enlace-formulario {
-        margin-top: 7px;
-        font-size: 13px;
     }
 
     @media (max-width: 430px) {
         .pagina-formulario .formulario-contenedor {
             width: 100%;
-            padding: 14px 15px 17px;
         }
 
-        .pagina-formulario .logo-formulario {
-            width: 125px !important;
-            height: 125px !important;
+        .pagina-formulario .icono-titulo {
+            width: 70px !important;
+            height: 70px !important;
         }
 
         .pagina-formulario .formulario-contenedor h1 {
             font-size: 20px;
         }
 
-        .pagina-formulario .formulario-contenedor h2 {
-            font-size: 15px;
-        }
-
-        .pagina-formulario .formulario-contenedor button[type="submit"] {
+        .pagina-formulario .formulario-contenedor .boton-principal {
             min-height: 62px !important;
         }
 
-        .pagina-formulario .formulario-contenedor button[type="submit"] img {
+        .pagina-formulario .formulario-contenedor .boton-principal img {
             width: 46px !important;
             height: 46px !important;
         }
     }
+    /* BOTÓN ACTUALIZAR — SOLO ESTA PÁGINA */
+.pagina-formulario .formulario-contenedor form .boton-principal {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    width: 100% !important;
+    min-height: 68px !important;
+    height: 68px !important;
+
+    position: relative !important;
+    z-index: 10 !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+
+    margin: 8px 0 0 !important;
+    padding: 8px 15px !important;
+
+    background: #f3a3c2 !important;
+    color: white !important;
+
+    border: none !important;
+    border-radius: 13px !important;
+
+    font-family: "Fredoka", sans-serif !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+}
+
+.pagina-formulario .formulario-contenedor form .boton-principal img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    width: 52px !important;
+    height: 52px !important;
+    object-fit: contain !important;
+}
 </style>
 
 </head>
@@ -177,30 +192,23 @@
         class="volver"
     >
 
-        ← Volver
+        ← Volver a la tienda
 
     </a>
 
 
     <img
-        class="logo-formulario"
-        src="{{ url_for('static', filename='img/Logo.png') }}"
-        alt="Logo"
+        class="icono-titulo"
+        src="{{ url_for('static', filename='img/Usuario.png') }}"
+        alt=""
     >
 
 
     <h1>
 
-        ¿Ya tienes una cuenta?
+        Actualizar usuario
 
     </h1>
-
-
-    <h2>
-
-        Inicia sesión 🐾
-
-    </h2>
 
 
     {% if error %}
@@ -214,20 +222,37 @@
     {% endif %}
 
 
-    {% if mensaje %}
-
-        <div class="exito-formulario">
-
-            {{ mensaje }}
-
-        </div>
-
-    {% endif %}
+    <form method="POST">
 
 
-    <form
-        method="POST"
-    >
+        <label>
+
+            Nombre
+
+        </label>
+
+
+        <input
+            type="text"
+            name="nombre"
+            value="{{ usuario.nombres }}"
+            required
+        >
+
+
+        <label>
+
+            Apellidos
+
+        </label>
+
+
+        <input
+            type="text"
+            name="apellidos"
+            value="{{ usuario.apellidos }}"
+            required
+        >
 
 
         <label>
@@ -239,14 +264,15 @@
 
         <input
             type="email"
-            name="usuario"
+            name="correo"
+            value="{{ usuario.email }}"
             required
         >
 
 
         <label>
 
-            Contraseña
+            Nueva contraseña
 
         </label>
 
@@ -254,7 +280,7 @@
         <input
             type="password"
             name="password"
-            required
+            placeholder="Déjalo vacío si no deseas cambiarla"
         >
 
 
@@ -272,39 +298,16 @@
         </label>
 
 
-        <button
-            type="submit"
-            class="boton-principal"
-        >
-
-            <img
-                src="{{ url_for('static', filename='img/Candado.png') }}"
-                alt=""
-            >
-
-            Entrar
-
-        </button>
+        <button type="submit">
+    <img
+        src="{{ url_for('static', filename='img/Lapiz.png') }}"
+        alt=""
+    >
+    Actualizar usuario
+</button>
 
 
     </form>
-
-
-    <p class="enlace-formulario">
-
-        ¿Eres nuevo aquí?
-
-    </p>
-
-
-    <a
-        href="{{ url_for('registrar') }}"
-        class="boton-secundario"
-    >
-
-        Registrarme
-
-    </a>
 
 
 </div>

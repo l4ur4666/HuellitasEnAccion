@@ -10,94 +10,135 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>🐾 Crear Cuenta - Huellitas En Acción</title>
+    <title>Registro</title>
 
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
 
     <style>
 
-        body {
+        /* ================================
+           REGISTRO - AJUSTES LOCALES
+           ================================ */
 
-            background: #ffdff1;
-
-            font-family: Arial, sans-serif;
-
+        .pagina-formulario .formulario-contenedor {
+            width: min(520px, 100%);
         }
 
+        .pagina-formulario .logo-formulario {
+            width: 170px !important;
+            height: 170px !important;
+            object-fit: contain;
+            display: block;
+            margin: 10px auto 5px;
+        }
 
-        .contenedor {
-
-            width: 350px;
-
-            margin: 80px auto;
-
-            background: white;
-
-            padding: 30px;
-
-            border-radius: 20px;
-
+        .pagina-formulario .formulario-contenedor h1 {
+            margin: 5px 0 18px;
+            font-size: 25px;
             text-align: center;
-
-            box-shadow: 0 0 10px rgba(0,0,0,.15);
-
         }
 
-
-        h2 {
-
-            color: #7ec8f8;
-
+        .pagina-formulario .formulario-contenedor form {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 8px !important;
+            width: 100%;
         }
 
-
-        input {
-
-            width: 90%;
-
-            padding: 10px;
-
-            margin: 10px 0;
-
-            border-radius: 10px;
-
-            border: 1px solid #ccc;
-
+        .pagina-formulario .formulario-contenedor form label {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin-top: 3px;
         }
 
-
-        button {
-
-            width: 95%;
-
-            padding: 10px;
-
-            background: #7ec8f8;
-
-            color: white;
-
-            border: none;
-
-            border-radius: 10px;
-
-            cursor: pointer;
-
-            font-size: 16px;
-
+        .pagina-formulario .formulario-contenedor form input[type="text"],
+        .pagina-formulario .formulario-contenedor form input[type="email"],
+        .pagina-formulario .formulario-contenedor form input[type="password"] {
+            width: 100% !important;
+            height: 42px !important;
+            min-height: 42px !important;
+            box-sizing: border-box !important;
+            padding: 8px 14px !important;
+            margin: 0 !important;
         }
 
-
-        button:hover {
-
-            background: #65b8ec;
-
+        .pagina-formulario .formulario-contenedor form .no-robot {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            width: 100% !important;
+            margin: 8px 0 5px !important;
+            text-align: center !important;
         }
 
+        .pagina-formulario .formulario-contenedor form .no-robot input[type="checkbox"] {
+            width: 18px !important;
+            height: 18px !important;
+            min-height: 18px !important;
+            margin: 0 !important;
+            flex: 0 0 auto;
+        }
 
-        a {
+        .pagina-formulario .formulario-contenedor form .boton-principal {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            width: 100% !important;
+            min-height: 68px !important;
+            height: 68px !important;
+            padding: 7px 15px !important;
+            margin-top: 5px !important;
+            box-sizing: border-box !important;
+            position: relative !important;
+            z-index: 10 !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
 
-            text-decoration: none;
+        .pagina-formulario .formulario-contenedor form .boton-principal img {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 52px !important;
+            height: 52px !important;
+            object-fit: contain;
+            flex: 0 0 auto;
+        }
 
-            color: #7ec8f8;
+        .pagina-formulario .enlace-formulario {
+            margin: 18px 0 8px;
+            text-align: center;
+        }
+
+        .pagina-formulario .boton-secundario {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 430px) {
+
+            .pagina-formulario .logo-formulario {
+                width: 125px !important;
+                height: 125px !important;
+            }
+
+            .pagina-formulario .formulario-contenedor h1 {
+                font-size: 22px;
+            }
 
         }
 
@@ -106,57 +147,113 @@
 </head>
 
 
-<body>
+<body class="pagina-formulario">
 
 
-<div class="contenedor">
+<div class="formulario-contenedor">
 
 
-    <h2>
+    <a
+        href="{{ url_for('tienda') }}"
+        class="volver"
+    >
+        ← Volver
+    </a>
 
-        🐾 Crear Cuenta 💖
 
-    </h2>
-
-
-    <form
-        action="/registro"
-        method="POST"
+    <img
+        class="logo-formulario"
+        src="{{ url_for('static', filename='img/Logo.png') }}"
+        alt="Logo"
     >
 
 
-  <input
-    type="text"
-    name="nombre"
-    placeholder="👤 Nombre"
-    required
->
-
-<input
-    type="text"
-    name="apellidos"
-    placeholder="👤 Apellidos"
-    required
->
-
-<input
-    type="email"
-    name="correo"
-    placeholder="📧 Correo"
-    required
->
-
-<input
-    type="password"
-    name="password"
-    placeholder="🔒 Contraseña"
-    required
->
+    <h1>
+        ¡Únete a nosotros! 🐾
+    </h1>
 
 
-        <button type="submit">
+    {% if error %}
 
-            🐾 Registrarse
+        <div class="error-formulario">
+            {{ error }}
+        </div>
+
+    {% endif %}
+
+
+    <form method="POST">
+
+
+        <label>
+            Nombre
+        </label>
+
+        <input
+            type="text"
+            name="nombre"
+            required
+        >
+
+
+        <label>
+            Apellido
+        </label>
+
+        <input
+            type="text"
+            name="apellidos"
+            required
+        >
+
+
+        <label>
+            Correo electrónico
+        </label>
+
+        <input
+            type="email"
+            name="correo"
+            required
+        >
+
+
+        <label>
+            Contraseña
+        </label>
+
+        <input
+            type="password"
+            name="password"
+            required
+        >
+
+
+        <label class="no-robot">
+
+            <input
+                type="checkbox"
+                name="no_robot"
+                value="1"
+                required
+            >
+
+            Verifico que no soy un robot
+
+        </label>
+
+
+        <button
+            type="submit"
+            class="boton-principal"
+        >
+
+            <img
+                src="{{ url_for('static', filename='img/Huellas.png') }}"
+                alt=""
+            >
+
+            Registrarme
 
         </button>
 
@@ -164,13 +261,16 @@
     </form>
 
 
-    <br><br>
+    <p class="enlace-formulario">
+        ¿Ya tienes una cuenta?
+    </p>
 
 
-    <a href="/login">
-
-        🔐 Ya tengo cuenta
-
+    <a
+        href="{{ url_for('login') }}"
+        class="boton-secundario"
+    >
+        Iniciar sesión
     </a>
 
 

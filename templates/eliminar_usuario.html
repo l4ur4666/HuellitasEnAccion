@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Eliminar usuario
+    </title>
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+
+</head>
+
+
+<body class="pagina-formulario">
+
+
+<div class="formulario-contenedor eliminar-contenedor">
+
+
+    <a
+        href="{{ url_for('tienda') }}"
+        class="volver"
+    >
+
+        ← Volver
+
+    </a>
+
+
+    <img
+        class="icono-titulo"
+        src="{{ url_for('static', filename='img/Basura.png') }}"
+        alt=""
+    >
+
+
+    <h1>
+
+        ¿Estás seguro de que quieres
+        eliminar tu usuario?
+
+    </h1>
+
+
+    <p class="texto-eliminar">
+
+        Esta acción desactivará tu cuenta.
+
+    </p>
+
+
+    {% if error %}
+
+        <div class="error-formulario">
+
+            {{ error }}
+
+        </div>
+
+    {% endif %}
+
+
+    <form method="POST">
+
+
+        <label class="no-robot">
+
+            <input
+                type="checkbox"
+                name="confirmar"
+                value="1"
+                required
+            >
+
+            Sí, deseo eliminar mi cuenta
+
+        </label>
+
+
+        <label class="no-robot">
+
+            <input
+                type="checkbox"
+                name="no_robot"
+                value="1"
+                required
+            >
+
+            Verifico que no soy un robot
+
+        </label>
+
+
+        <div class="botones-eliminar">
+
+
+            <a
+                href="{{ url_for('tienda') }}"
+                class="boton-secundario"
+            >
+
+                No, volver
+
+            </a>
+
+
+            <button
+                type="submit"
+                class="boton-eliminar"
+            >
+
+                <img
+                    src="{{ url_for('static', filename='img/Basura.png') }}"
+                    alt=""
+                >
+
+                Sí, eliminar
+
+            </button>
+
+
+        </div>
+
+
+    </form>
+
+
+</div>
+
+
+</body>
+
+</html>

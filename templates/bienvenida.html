@@ -10,153 +10,92 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>🐾 Bienvenido - Huellitas En Acción</title>
+    <title>Huellitas En Acción</title>
 
 
-    <style>
+    <!-- TIPOGRAFÍAS -->
 
-        body {
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
-            margin: 0;
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-            background: #ffdff1;
-
-            font-family: Arial, sans-serif;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            min-height: 100vh;
-
-        }
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
 
-        .contenedor {
+    <!-- CSS -->
 
-            background: white;
-
-            width: 400px;
-
-            padding: 40px;
-
-            border-radius: 25px;
-
-            text-align: center;
-
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-
-        }
-
-
-        .huella {
-
-            font-size: 65px;
-
-        }
-
-
-        h1 {
-
-            color: #7ec8f8;
-
-            font-size: 30px;
-
-        }
-
-
-        p {
-
-            color: #666;
-
-            font-size: 18px;
-
-        }
-
-
-        .boton {
-
-            display: inline-block;
-
-            margin-top: 20px;
-
-            padding: 14px 25px;
-
-            background: #7ec8f8;
-
-            color: white;
-
-            text-decoration: none;
-
-            border-radius: 15px;
-
-            font-size: 18px;
-
-            font-weight: bold;
-
-        }
-
-
-        .boton:hover {
-
-            background: #65b8ec;
-
-        }
-
-    </style>
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
 
 </head>
 
 
-<body>
+<body class="pagina-bienvenida">
 
 
-<div class="contenedor">
+    <main class="bienvenida">
 
 
-    <div class="huella">
-
-        🐾
-
-    </div>
+        <section class="bienvenida-contenido">
 
 
-    <h1>
+            <!-- IMAGEN DE BIENVENIDA -->
 
-        💖 ¡Bienvenido/a, {{ nombre }}! 💖
-
-    </h1>
-
-
-    <p>
-
-        Has iniciado sesión correctamente. ✨
-
-    </p>
+            <img
+                class="imagen-perritos"
+                src="{{ url_for('static', filename='img/bienvenida.jpeg') }}"
+                alt="Bienvenida a Huellitas En Acción"
+            >
 
 
-    <p>
+            <!-- TÍTULO -->
 
-        ¡Nos alegra tenerte en
-
-        <b>Huellitas En Acción</b>! 🐶🐱
-
-    </p>
+            <h1>
+                Huellitas En Acción
+            </h1>
 
 
-    <a
-        href="/"
-        class="boton"
-    >
+            <!-- SUBTÍTULO -->
 
-        🏠 Entrar a la tienda
-
-    </a>
+            <h2>
+                ¡Bienvenida!
+            </h2>
 
 
-</div>
+            <!-- DESCRIPCIÓN -->
+
+            <p>
+                Un espacio creado con amor
+                para nuestras mascotas.
+            </p>
+
+
+            <!-- BOTÓN -->
+
+            <a
+                href="{{ url_for('tienda') }}"
+                class="boton-entrar"
+            >
+                Entrar a Huellitas En Acción
+            </a>
+
+
+        </section>
+
+
+    </main>
 
 
 </body>
