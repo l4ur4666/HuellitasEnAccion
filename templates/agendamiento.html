@@ -27,6 +27,395 @@
         href="{{ url_for('static', filename='css/estilos.css') }}"
     >
 
+
+    <style>
+
+        /* =====================================================
+           AJUSTES EXCLUSIVOS DEL AGENDAMIENTO
+           NO MODIFICA LAS DEMÁS PÁGINAS
+        ===================================================== */
+
+        .pagina-formulario .formulario-contenedor {
+            width: min(520px, 100%);
+            padding: 20px 30px 28px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           ENLACE VOLVER
+        ===================================================== */
+
+        .pagina-formulario .volver {
+            display: inline-block;
+            margin-bottom: 8px;
+            font-family: "Quicksand", sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           ICONO SUPERIOR
+        ===================================================== */
+
+        .pagina-formulario .icono-titulo {
+            width: 105px !important;
+            height: 105px !important;
+            object-fit: contain !important;
+            display: block !important;
+            margin: 0 auto 8px !important;
+        }
+
+
+        /* =====================================================
+           TÍTULO
+        ===================================================== */
+
+        .pagina-formulario .formulario-contenedor h1 {
+            margin: 3px 0 4px;
+            font-family: "Fredoka", sans-serif;
+            font-size: 27px;
+            color: #5c5060;
+        }
+
+
+        /* =====================================================
+           HORARIO
+        ===================================================== */
+
+        .pagina-formulario .horario-atencion {
+            margin: 0 0 14px;
+            font-family: "Quicksand", sans-serif;
+            font-size: 14px;
+            color: #7d6f78;
+            line-height: 1.4;
+        }
+
+
+        /* =====================================================
+           MENSAJES
+        ===================================================== */
+
+        .pagina-formulario .error-formulario,
+        .pagina-formulario .mensaje-flash {
+            margin: 8px auto 12px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           FORMULARIO
+        ===================================================== */
+
+        .pagina-formulario .formulario-contenedor form {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 7px !important;
+            width: 100%;
+            margin: 0;
+        }
+
+
+        /* =====================================================
+           ETIQUETAS
+        ===================================================== */
+
+        .pagina-formulario .formulario-contenedor form label {
+            display: block !important;
+            width: 100% !important;
+            text-align: left !important;
+            margin: 2px 0 0;
+            font-family: "Quicksand", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: #5f5360;
+        }
+
+
+        /* =====================================================
+           CAMPOS
+        ===================================================== */
+
+        .pagina-formulario .formulario-contenedor form input[type="text"],
+        .pagina-formulario .formulario-contenedor form input[type="email"],
+        .pagina-formulario .formulario-contenedor form input[type="date"],
+        .pagina-formulario .formulario-contenedor form input[type="time"],
+        .pagina-formulario .formulario-contenedor form textarea {
+
+            display: block !important;
+
+            width: 100% !important;
+
+            box-sizing: border-box !important;
+
+            border: 1px solid #b7a5ae !important;
+
+            border-radius: 8px !important;
+
+            background: white !important;
+
+            outline: none !important;
+
+            font-family: "Quicksand", sans-serif;
+
+            font-size: 14px;
+
+            color: #5c5060;
+
+        }
+
+
+        .pagina-formulario .formulario-contenedor form input[type="text"],
+        .pagina-formulario .formulario-contenedor form input[type="email"],
+        .pagina-formulario .formulario-contenedor form input[type="date"],
+        .pagina-formulario .formulario-contenedor form input[type="time"] {
+
+            height: 40px !important;
+
+            padding: 8px 12px !important;
+
+        }
+
+
+        .pagina-formulario .formulario-contenedor form textarea {
+
+            min-height: 95px !important;
+
+            padding: 10px 12px !important;
+
+            resize: vertical;
+
+        }
+
+
+        /* =====================================================
+           CAMPOS BLOQUEADOS
+        ===================================================== */
+
+        .pagina-formulario .formulario-contenedor
+        input[readonly] {
+
+            background: #fff8fb !important;
+
+            color: #6d5f67 !important;
+
+        }
+
+
+        /* =====================================================
+           PLACEHOLDER
+        ===================================================== */
+
+        .pagina-formulario .formulario-contenedor
+        input::placeholder,
+
+        .pagina-formulario .formulario-contenedor
+        textarea::placeholder {
+
+            color: #aaa0a6;
+
+        }
+
+
+        /* =====================================================
+           CHECKBOX NO ROBOT
+        ===================================================== */
+
+        .pagina-formulario .formulario-contenedor
+        .no-robot {
+
+            display: flex !important;
+
+            flex-direction: row !important;
+
+            align-items: center !important;
+
+            justify-content: center !important;
+
+            gap: 7px !important;
+
+            width: 100% !important;
+
+            margin: 6px 0 2px !important;
+
+            text-align: center !important;
+
+            font-family: "Quicksand", sans-serif;
+
+            font-size: 11px !important;
+
+            font-weight: 500 !important;
+
+        }
+
+
+        .pagina-formulario .formulario-contenedor
+        .no-robot input[type="checkbox"] {
+
+            width: auto !important;
+
+            height: auto !important;
+
+            margin: 0 !important;
+
+        }
+
+
+        /* =====================================================
+           BOTÓN
+        ===================================================== */
+
+        .pagina-formulario .formulario-contenedor
+        button[type="submit"] {
+
+            width: 100% !important;
+
+            min-height: 68px !important;
+
+            height: auto !important;
+
+            margin-top: 6px !important;
+
+            padding: 8px 15px !important;
+
+            box-sizing: border-box !important;
+
+            border: none !important;
+
+            border-radius: 13px !important;
+
+            background: #f3a3c2 !important;
+
+            color: white !important;
+
+            display: flex !important;
+
+            align-items: center !important;
+
+            justify-content: center !important;
+
+            gap: 12px !important;
+
+            font-family: "Fredoka", sans-serif !important;
+
+            font-size: 16px !important;
+
+            cursor: pointer;
+
+        }
+
+
+        .pagina-formulario .formulario-contenedor
+        button[type="submit"] img {
+
+            width: 50px !important;
+
+            height: 50px !important;
+
+            max-width: 50px !important;
+
+            object-fit: contain !important;
+
+            display: block !important;
+
+        }
+
+
+        .pagina-formulario .formulario-contenedor
+        button[type="submit"]:hover {
+
+            opacity: 0.92;
+
+        }
+
+
+        /* =====================================================
+           CELULARES
+        ===================================================== */
+
+        @media (max-width: 430px) {
+
+            .pagina-formulario .formulario-contenedor {
+
+                width: 100%;
+
+                padding: 15px 15px 20px;
+
+            }
+
+
+            .pagina-formulario .icono-titulo {
+
+                width: 90px !important;
+
+                height: 90px !important;
+
+            }
+
+
+            .pagina-formulario .formulario-contenedor h1 {
+
+                font-size: 22px;
+
+            }
+
+
+            .pagina-formulario .horario-atencion {
+
+                font-size: 12px;
+
+            }
+
+
+            .pagina-formulario .formulario-contenedor
+            form input[type="text"],
+
+            .pagina-formulario .formulario-contenedor
+            form input[type="email"],
+
+            .pagina-formulario .formulario-contenedor
+            form input[type="date"],
+
+            .pagina-formulario .formulario-contenedor
+            form input[type="time"] {
+
+                height: 38px !important;
+
+            }
+
+
+            .pagina-formulario .formulario-contenedor
+            form textarea {
+
+                min-height: 85px !important;
+
+            }
+
+
+            .pagina-formulario .formulario-contenedor
+            button[type="submit"] {
+
+                min-height: 62px !important;
+
+            }
+
+
+            .pagina-formulario .formulario-contenedor
+            button[type="submit"] img {
+
+                width: 45px !important;
+
+                height: 45px !important;
+
+            }
+
+        }
+
+    </style>
+
 </head>
 
 
@@ -49,7 +438,7 @@
     <img
         class="icono-titulo"
         src="{{ url_for('static', filename='img/Calendario.png') }}"
-        alt=""
+        alt="Calendario"
     >
 
 
