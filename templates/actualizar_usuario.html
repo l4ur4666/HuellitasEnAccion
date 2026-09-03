@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
@@ -11,172 +10,174 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Actualizar usuario
-    </title>
-
+    <title>Actualizar usuario</title>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
-
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/estilos.css') }}"
     >
+
     <style>
-    /* =====================================================
-       AJUSTES EXCLUSIVOS DE ACTUALIZAR USUARIO
-       ===================================================== */
 
-    .pagina-formulario .formulario-contenedor {
-        width: min(520px, 100%);
-    }
+        /* =====================================================
+           ACTUALIZAR USUARIO
+           ===================================================== */
 
-    .pagina-formulario .icono-titulo {
-        width: 85px !important;
-        height: 85px !important;
-        object-fit: contain !important;
-        display: block !important;
-        margin: 5px auto 8px !important;
-    }
-
-    .pagina-formulario .formulario-contenedor h1 {
-        margin: 5px 0 15px;
-        font-size: 25px;
-    }
-
-    .pagina-formulario .formulario-contenedor form {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 8px !important;
-        width: 100%;
-    }
-
-    .pagina-formulario .formulario-contenedor label {
-        display: block;
-        width: 100%;
-        text-align: left;
-        font-size: 13px;
-        font-weight: 600;
-    }
-
-    .pagina-formulario .formulario-contenedor input[type="text"],
-    .pagina-formulario .formulario-contenedor input[type="email"],
-    .pagina-formulario .formulario-contenedor input[type="password"] {
-        display: block !important;
-        width: 100% !important;
-        height: 38px !important;
-        padding: 7px 12px !important;
-        box-sizing: border-box !important;
-        border: 1px solid #b7a5ae !important;
-        border-radius: 7px !important;
-        background: white !important;
-        font-size: 14px !important;
-    }
-
-    .pagina-formulario .formulario-contenedor .no-robot {
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        margin: 3px 0;
-        font-size: 11px;
-        font-weight: 400;
-    }
-
-    .pagina-formulario .formulario-contenedor .no-robot input {
-        width: auto !important;
-        height: auto !important;
-    }
-
-    .pagina-formulario .formulario-contenedor .boton-principal {
-        width: 100% !important;
-        min-height: 68px !important;
-        margin-top: 5px;
-        padding: 8px 15px !important;
-        box-sizing: border-box !important;
-        border-radius: 13px !important;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        font-family: "Fredoka", sans-serif;
-        font-size: 16px;
-    }
-
-    .pagina-formulario .formulario-contenedor .boton-principal img {
-        width: 52px !important;
-        height: 52px !important;
-        object-fit: contain !important;
-    }
-
-    @media (max-width: 430px) {
         .pagina-formulario .formulario-contenedor {
-            width: 100%;
+            width: min(520px, calc(100% - 30px));
+            box-sizing: border-box;
         }
 
         .pagina-formulario .icono-titulo {
-            width: 70px !important;
-            height: 70px !important;
+            width: 80px !important;
+            height: 80px !important;
+            object-fit: contain !important;
+            display: block !important;
+            margin: 8px auto 10px !important;
         }
 
         .pagina-formulario .formulario-contenedor h1 {
-            font-size: 20px;
+            margin: 5px 0 18px;
+            font-size: 26px;
+            text-align: center;
         }
 
-        .pagina-formulario .formulario-contenedor .boton-principal {
-            min-height: 62px !important;
+        .pagina-formulario .formulario-contenedor form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .pagina-formulario .formulario-contenedor .boton-principal img {
-            width: 46px !important;
-            height: 46px !important;
+        .pagina-formulario .formulario-contenedor label {
+            display: block;
+            width: 100%;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            box-sizing: border-box;
         }
-    }
-    /* BOTÓN ACTUALIZAR — SOLO ESTA PÁGINA */
-.pagina-formulario .formulario-contenedor form .boton-principal {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
 
-    width: 100% !important;
-    min-height: 68px !important;
-    height: 68px !important;
+        .pagina-formulario .formulario-contenedor input[type="text"],
+        .pagina-formulario .formulario-contenedor input[type="email"],
+        .pagina-formulario .formulario-contenedor input[type="password"] {
+            display: block;
+            width: 100%;
+            height: 40px;
+            padding: 8px 12px;
+            box-sizing: border-box;
+            border: 1px solid #b7a5ae;
+            border-radius: 8px;
+            background: white;
+            font-family: "Quicksand", sans-serif;
+            font-size: 14px;
+            outline: none;
+        }
 
-    position: relative !important;
-    z-index: 10 !important;
+        .pagina-formulario .formulario-contenedor input[type="text"]:focus,
+        .pagina-formulario .formulario-contenedor input[type="email"]:focus,
+        .pagina-formulario .formulario-contenedor input[type="password"]:focus {
+            border-color: #e85aa7;
+            box-shadow: 0 0 0 2px rgba(232, 90, 167, 0.12);
+        }
 
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 12px !important;
+        .pagina-formulario .no-robot {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 7px !important;
+            width: 100% !important;
+            margin: 5px 0 !important;
+            text-align: center !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+        }
 
-    margin: 8px 0 0 !important;
-    padding: 8px 15px !important;
+        .pagina-formulario .no-robot input[type="checkbox"] {
+            width: 15px !important;
+            height: 15px !important;
+            margin: 0 !important;
+            flex: 0 0 auto;
+        }
 
-    background: #f3a3c2 !important;
-    color: white !important;
+        .pagina-formulario .boton-principal {
+            width: 100% !important;
+            min-height: 68px !important;
+            height: 68px !important;
+            margin-top: 7px !important;
+            padding: 8px 18px !important;
+            box-sizing: border-box !important;
 
-    border: none !important;
-    border-radius: 13px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 12px !important;
 
-    font-family: "Fredoka", sans-serif !important;
-    font-size: 16px !important;
-    cursor: pointer !important;
-}
+            background: #f3a3c2 !important;
+            color: white !important;
 
-.pagina-formulario .formulario-contenedor form .boton-principal img {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+            border: none !important;
+            border-radius: 13px !important;
 
-    width: 52px !important;
-    height: 52px !important;
-    object-fit: contain !important;
-}
-</style>
+            font-family: "Fredoka", sans-serif !important;
+            font-size: 17px !important;
+            font-weight: 600 !important;
+
+            cursor: pointer !important;
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .pagina-formulario .boton-principal:hover {
+            background: #ea8fb4 !important;
+            transform: translateY(-1px);
+        }
+
+        .pagina-formulario .boton-principal img {
+            width: 48px !important;
+            height: 48px !important;
+            object-fit: contain !important;
+            display: block !important;
+        }
+
+        .pagina-formulario .error-formulario {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 430px) {
+
+            .pagina-formulario .formulario-contenedor {
+                width: calc(100% - 20px);
+            }
+
+            .pagina-formulario .icono-titulo {
+                width: 68px !important;
+                height: 68px !important;
+            }
+
+            .pagina-formulario .formulario-contenedor h1 {
+                font-size: 21px;
+            }
+
+            .pagina-formulario .boton-principal {
+                min-height: 62px !important;
+                height: 62px !important;
+                font-size: 15px !important;
+            }
+
+            .pagina-formulario .boton-principal img {
+                width: 42px !important;
+                height: 42px !important;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -191,94 +192,83 @@
         href="{{ url_for('tienda') }}"
         class="volver"
     >
-
         ← Volver a la tienda
-
     </a>
 
 
     <img
         class="icono-titulo"
         src="{{ url_for('static', filename='img/Usuario.png') }}"
-        alt=""
+        alt="Actualizar usuario"
     >
 
 
     <h1>
-
         Actualizar usuario
-
     </h1>
 
 
     {% if error %}
 
         <div class="error-formulario">
-
             {{ error }}
-
         </div>
 
     {% endif %}
 
 
-    <form method="POST">
+    <form
+        action="{{ url_for('actualizar_usuario') }}"
+        method="POST"
+    >
 
 
-        <label>
-
+        <label for="nombre">
             Nombre
-
         </label>
-
 
         <input
             type="text"
+            id="nombre"
             name="nombre"
             value="{{ usuario.nombres }}"
             required
         >
 
 
-        <label>
-
+        <label for="apellidos">
             Apellidos
-
         </label>
-
 
         <input
             type="text"
+            id="apellidos"
             name="apellidos"
             value="{{ usuario.apellidos }}"
             required
         >
 
 
-        <label>
-
+        <label for="correo">
             Correo electrónico
-
         </label>
-
 
         <input
             type="email"
+            id="correo"
             name="correo"
             value="{{ usuario.email }}"
             required
         >
 
 
-        <label>
-
+        <label for="password">
             Nueva contraseña
-
         </label>
-
 
         <input
             type="password"
+            id="password"
             name="password"
             placeholder="Déjalo vacío si no deseas cambiarla"
         >
@@ -298,13 +288,21 @@
         </label>
 
 
-        <button type="submit">
-    <img
-        src="{{ url_for('static', filename='img/Lapiz.png') }}"
-        alt=""
-    >
-    Actualizar usuario
-</button>
+        <button
+            type="submit"
+            class="boton-principal"
+        >
+
+            <img
+                src="{{ url_for('static', filename='img/Lapiz.png') }}"
+                alt=""
+            >
+
+            <span>
+                Actualizar usuario
+            </span>
+
+        </button>
 
 
     </form>
