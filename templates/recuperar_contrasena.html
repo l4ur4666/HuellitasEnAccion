@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Recuperar contraseña
+    </title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+
+    <style>
+
+        .pagina-recuperacion {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .contenedor-recuperacion {
+            width: min(520px, 100%);
+            padding: 30px;
+            box-sizing: border-box;
+            background: #fff8fc;
+            border: 3px solid #f3a3c2;
+            border-radius: 28px;
+            box-shadow: 0 10px 30px rgba(120, 70, 100, 0.15);
+            text-align: center;
+        }
+
+        .logo-recuperacion {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 5px;
+        }
+
+        .contenedor-recuperacion h1 {
+            margin: 5px 0 8px;
+            color: #75445b;
+            font-family: "Fredoka", sans-serif;
+            font-size: 26px;
+        }
+
+        .contenedor-recuperacion p {
+            margin: 0 0 20px;
+            color: #5c5060;
+            font-family: "Quicksand", sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .contenedor-recuperacion form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contenedor-recuperacion label {
+            text-align: left;
+            color: #5c5060;
+            font-family: "Quicksand", sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .contenedor-recuperacion input[type="email"] {
+            width: 100%;
+            height: 42px;
+            padding: 8px 12px;
+            box-sizing: border-box;
+            border: 1px solid #b7a5ae;
+            border-radius: 9px;
+            background: white;
+            font-size: 14px;
+        }
+
+        .boton-enviar-codigo {
+            width: 100%;
+            min-height: 52px;
+            margin-top: 6px;
+            border: none;
+            border-radius: 14px;
+            background: #f3a3c2;
+            color: white;
+            font-family: "Fredoka", sans-serif;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .boton-enviar-codigo:hover {
+            opacity: 0.9;
+        }
+
+        .error-recuperacion {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            background: #ffe3ec;
+            color: #a43f63;
+            font-family: "Quicksand", sans-serif;
+            font-size: 13px;
+        }
+
+        .volver-login {
+            display: inline-block;
+            margin-top: 18px;
+            color: #8b5c72;
+            font-family: "Quicksand", sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .volver-login:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 430px) {
+
+            .contenedor-recuperacion {
+                padding: 22px 18px;
+            }
+
+            .logo-recuperacion {
+                width: 120px;
+                height: 120px;
+            }
+
+            .contenedor-recuperacion h1 {
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="pagina-recuperacion">
+
+
+    <div class="contenedor-recuperacion">
+
+
+        <a
+            href="{{ url_for('login') }}"
+            class="volver-login"
+        >
+            ← Volver al inicio de sesión
+        </a>
+
+
+        <br>
+
+
+        <img
+            src="{{ url_for('static', filename='img/logo.png') }}"
+            class="logo-recuperacion"
+            alt="Huellitas En Acción"
+        >
+
+
+        <h1>
+            ¿Olvidaste tu contraseña? 🐾
+        </h1>
+
+
+        <p>
+            Escribe el correo electrónico de tu cuenta
+            y te enviaremos un código de verificación.
+        </p>
+
+
+        {% if error %}
+
+            <div class="error-recuperacion">
+                {{ error }}
+            </div>
+
+        {% endif %}
+
+
+        <form
+            action="{{ url_for('recuperar_contrasena') }}"
+            method="POST"
+        >
+
+            <label for="correo">
+                Correo electrónico
+            </label>
+
+
+            <input
+                type="email"
+                id="correo"
+                name="correo"
+                placeholder="tu-correo@gmail.com"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="boton-enviar-codigo"
+            >
+                📧 Enviar código
+            </button>
+
+        </form>
+
+
+    </div>
+
+
+</body>
+
+</html>

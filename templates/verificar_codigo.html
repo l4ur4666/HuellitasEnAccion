@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Verificar código
+    </title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+
+    <style>
+
+        .pagina-verificacion {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .contenedor-verificacion {
+            width: min(520px, 100%);
+            padding: 30px;
+            box-sizing: border-box;
+            background: #fff8fc;
+            border: 3px solid #f3a3c2;
+            border-radius: 28px;
+            box-shadow: 0 10px 30px rgba(120, 70, 100, 0.15);
+            text-align: center;
+        }
+
+        .logo-verificacion {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 5px;
+        }
+
+        .contenedor-verificacion h1 {
+            margin: 5px 0 8px;
+            color: #75445b;
+            font-family: "Fredoka", sans-serif;
+            font-size: 26px;
+        }
+
+        .correo-mostrado {
+            color: #8b5c72;
+            font-family: "Quicksand", sans-serif;
+            font-size: 13px;
+            margin-bottom: 20px;
+            word-break: break-word;
+        }
+
+        .contenedor-verificacion form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contenedor-verificacion label {
+            text-align: left;
+            color: #5c5060;
+            font-family: "Quicksand", sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .contenedor-verificacion input[type="text"] {
+            width: 100%;
+            height: 48px;
+            padding: 8px 12px;
+            box-sizing: border-box;
+            border: 1px solid #b7a5ae;
+            border-radius: 9px;
+            background: white;
+            font-size: 22px;
+            text-align: center;
+            letter-spacing: 6px;
+        }
+
+        .boton-verificar {
+            width: 100%;
+            min-height: 52px;
+            margin-top: 6px;
+            border: none;
+            border-radius: 14px;
+            background: #f3a3c2;
+            color: white;
+            font-family: "Fredoka", sans-serif;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .boton-verificar:hover {
+            opacity: 0.9;
+        }
+
+        .error-verificacion {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            background: #ffe3ec;
+            color: #a43f63;
+            font-family: "Quicksand", sans-serif;
+            font-size: 13px;
+        }
+
+        .volver-recuperacion {
+            display: inline-block;
+            margin-top: 18px;
+            color: #8b5c72;
+            font-family: "Quicksand", sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .volver-recuperacion:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 430px) {
+
+            .contenedor-verificacion {
+                padding: 22px 18px;
+            }
+
+            .logo-verificacion {
+                width: 120px;
+                height: 120px;
+            }
+
+            .contenedor-verificacion h1 {
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="pagina-verificacion">
+
+
+    <div class="contenedor-verificacion">
+
+
+        <img
+            src="{{ url_for('static', filename='img/logo.png') }}"
+            class="logo-verificacion"
+            alt="Huellitas En Acción"
+        >
+
+
+        <h1>
+            Verifica tu código 🐾
+        </h1>
+
+
+        <p class="correo-mostrado">
+
+            Enviamos un código de 6 dígitos a:
+
+            <br>
+
+            <strong>
+                {{ correo }}
+            </strong>
+
+        </p>
+
+
+        {% if error %}
+
+            <div class="error-verificacion">
+                {{ error }}
+            </div>
+
+        {% endif %}
+
+
+        <form
+            action="{{ url_for('verificar_codigo') }}"
+            method="POST"
+        >
+
+            <label for="codigo">
+                Código de verificación
+            </label>
+
+
+            <input
+                type="text"
+                id="codigo"
+                name="codigo"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                maxlength="6"
+                pattern="[0-9]{6}"
+                placeholder="000000"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="boton-verificar"
+            >
+                ✅ Verificar código
+            </button>
+
+        </form>
+
+
+        <a
+            href="{{ url_for('recuperar_contrasena') }}"
+            class="volver-recuperacion"
+        >
+            ← Volver
+        </a>
+
+
+    </div>
+
+
+</body>
+
+</html>

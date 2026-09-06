@@ -28,6 +28,7 @@
     >
 
     <style>
+
     /* =====================================================
        AJUSTES EXCLUSIVOS DEL LOGIN
        NO AFECTA LAS DEMÁS PÁGINAS
@@ -133,7 +134,27 @@
         font-size: 13px;
     }
 
+    /* =====================================================
+       RECUPERAR CONTRASEÑA
+    ===================================================== */
+
+    .enlace-recuperar {
+        display: block;
+        margin-top: 4px;
+        margin-bottom: 3px;
+        color: #8b5c72;
+        font-family: "Quicksand", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .enlace-recuperar:hover {
+        text-decoration: underline;
+    }
+
     @media (max-width: 430px) {
+
         .pagina-formulario .formulario-contenedor {
             width: 100%;
             padding: 14px 15px 17px;
@@ -160,7 +181,9 @@
             width: 46px !important;
             height: 46px !important;
         }
+
     }
+
 </style>
 
 </head>
@@ -226,9 +249,9 @@
 
 
     <form
-    action="{{ url_for('login') }}"
-    method="POST"
->
+        action="{{ url_for('login') }}"
+        method="POST"
+    >
 
 
         <label>
@@ -257,6 +280,16 @@
             name="password"
             required
         >
+
+
+        <a
+            href="{{ url_for('recuperar_contrasena') }}"
+            class="enlace-recuperar"
+        >
+
+            ¿Olvidaste tu contraseña?
+
+        </a>
 
 
         <label class="no-robot">

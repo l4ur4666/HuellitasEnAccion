@@ -12,6 +12,7 @@
 
     <title>Huellitas En Acción</title>
 
+
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -28,10 +29,12 @@
         rel="stylesheet"
     >
 
+
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/estilos.css') }}"
     >
+
 
     <style>
 
@@ -284,6 +287,98 @@
 
             box-shadow:
                 0 5px 12px rgba(217, 117, 164, 0.25) !important;
+        }
+
+
+        /* =====================================================
+           ACCIONES DE LOS COMENTARIOS
+        ===================================================== */
+
+        .acciones-comentario {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .editar-comentario {
+            width: 100%;
+        }
+
+        .editar-comentario summary {
+            display: inline-block;
+            cursor: pointer;
+            padding: 9px 15px;
+            border-radius: 12px;
+            background: #f3a3c2;
+            color: white;
+            font-family: "Fredoka", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            list-style: none;
+        }
+
+        .editar-comentario summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .editar-comentario-contenido {
+            margin-top: 10px;
+            padding: 14px;
+            border-radius: 14px;
+            background: #fff8fc;
+            border: 1px solid #f0cedd;
+        }
+
+        .editar-comentario-contenido select,
+        .editar-comentario-contenido textarea {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #d7beca;
+            border-radius: 10px;
+            padding: 10px;
+            font-family: "Quicksand", sans-serif;
+            color: #5c5060;
+            background: white;
+        }
+
+        .editar-comentario-contenido textarea {
+            min-height: 85px;
+            resize: vertical;
+        }
+
+        .boton-guardar-comentario {
+            border: none;
+            border-radius: 12px;
+            padding: 9px 15px;
+            background: #7ec8f8;
+            color: white;
+            font-family: "Fredoka", sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .form-eliminar-comentario {
+            margin: 0;
+        }
+
+        .boton-eliminar-comentario {
+            border: none;
+            border-radius: 12px;
+            padding: 9px 15px;
+            background: #e98ba9;
+            color: white;
+            font-family: "Fredoka", sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .boton-guardar-comentario:hover,
+        .boton-eliminar-comentario:hover,
+        .editar-comentario summary:hover {
+            opacity: 0.9;
         }
 
 
@@ -644,22 +739,24 @@
                     </span>
 
                 </a>
-               <a
-    href="https://mail.google.com/mail/?view=cm&fs=1&to=redestrella677@gmail.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="opcion-menu"
->
 
-    <span class="icono-menu">
-        ✉️
-    </span>
 
-    <span>
-        Contáctanos
-    </span>
+                <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=redestrella677@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="opcion-menu"
+                >
 
-</a>
+                    <span class="icono-menu">
+                        ✉️
+                    </span>
+
+                    <span>
+                        Contáctanos
+                    </span>
+
+                </a>
 
             </div>
 
@@ -819,9 +916,112 @@
                             {{ comentario.creado_en }}
                         </small>
 
+
+                        {% if session.get("usuario_id") == comentario.id_usuario %}
+
+                            <div class="acciones-comentario">
+
+                                <details class="editar-comentario">
+
+                                    <summary>
+                                        ✏️ Editar comentario
+                                    </summary>
+
+                                    <div class="editar-comentario-contenido">
+
+                                        <form
+                                            action="{{ url_for('editar_comentario', id_comentario=comentario.id_comentario) }}"
+                                            method="POST"
+                                        >
+
+                                            <select
+                                                name="calificacion"
+                                                required
+                                            >
+
+                                                <option
+                                                    value="5"
+                                                    {% if comentario.calificacion == 5 %}selected{% endif %}
+                                                >
+                                                    ⭐⭐⭐⭐⭐
+                                                </option>
+
+                                                <option
+                                                    value="4"
+                                                    {% if comentario.calificacion == 4 %}selected{% endif %}
+                                                >
+                                                    ⭐⭐⭐⭐
+                                                </option>
+
+                                                <option
+                                                    value="3"
+                                                    {% if comentario.calificacion == 3 %}selected{% endif %}
+                                                >
+                                                    ⭐⭐⭐
+                                                </option>
+
+                                                <option
+                                                    value="2"
+                                                    {% if comentario.calificacion == 2 %}selected{% endif %}
+                                                >
+                                                    ⭐⭐
+                                                </option>
+
+                                                <option
+                                                    value="1"
+                                                    {% if comentario.calificacion == 1 %}selected{% endif %}
+                                                >
+                                                    ⭐
+                                                </option>
+
+                                            </select>
+
+
+                                            <textarea
+                                                name="comentario"
+                                                maxlength="1000"
+                                                required
+                                            >{{ comentario.comentario }}</textarea>
+
+
+                                            <button
+                                                type="submit"
+                                                class="boton-guardar-comentario"
+                                            >
+                                                💾 Guardar cambios
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </details>
+
+
+                                <form
+                                    action="{{ url_for('eliminar_comentario', id_comentario=comentario.id_comentario) }}"
+                                    method="POST"
+                                    class="form-eliminar-comentario"
+                                    onsubmit="return confirm('¿Seguro que deseas eliminar este comentario?');"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="boton-eliminar-comentario"
+                                    >
+                                        🗑️ Eliminar
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        {% endif %}
+
                     </div>
 
                 {% endfor %}
+
 
             {% else %}
 
@@ -873,10 +1073,11 @@
     <script>
 
         function cerrarMensaje() {
-    window.location.href = "{{ url_for('tienda') }}";
-}
 
-        
+            window.location.href =
+                "{{ url_for('tienda') }}";
+
+        }
 
 
         function mostrarBuscador() {
